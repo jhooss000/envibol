@@ -31,6 +31,7 @@ namespace Aplicacion.Mappings
             CreateMap<SeUsuarioDto, SegUsuario>();
             //CreateMap<ConInventarioDto, ConInventario>();
             CreateMap<GenClasificadorDto, GenClasificador>();
+
             CreateMap<GenClasificadortipoDto, GenClasificadortipo>();
  
 
