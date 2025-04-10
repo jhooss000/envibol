@@ -90,9 +90,4 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Pagos\Commands\" />
-    <Folder Include="Features\Pagos\Queries\" />
-  </ItemGroup>
-
 </Project>

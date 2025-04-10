@@ -1,10 +1,11 @@
 ﻿@using System.Collections
 @using Infraestructura.Models.Authentication
+<center>
+    <img src="/images/user-3.png" alt="Sedem" style=" height:140px; margin: 5px;" />
+</center>
 
-<div align="center">
-    <img src="images/internea.png" alt="Internet" style=" height: 57px; width: 130px; margin: 10px;" />
-</div>
-
+<MudText><center><small> <b>@_UserSession.perfil</b> </small></center> </MudText>
+<MudText><center><small>@_UserSession.sucursal</small></center>  </MudText>
 <MudDivider Class="mb-4" />
 
 <MudNavMenu>
@@ -65,11 +66,12 @@
 
     private IEnumerable _menuListaPrinci;
     List<SegMenuResponse> _menuLista = new List<SegMenuResponse>();
-
+    public ObjectEntity _UserSession = new ObjectEntity();
     protected override async Task OnInitializedAsync()
     {
         _menuLista = await _Storage.DatosMenu();
         _menuListaPrinci = _menuLista.Where(x => x.parentid < 0);
+        _UserSession = await _Storage.DatosUsuario();
     }
 
     /// <summary>

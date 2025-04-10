@@ -111,6 +111,8 @@ namespace Infraestructura.Services
                 return JsonSerializer.Deserialize<ResponseEntity<T>>(errorres);
             }
         }
+   
+
 
         public async Task<T> GetPlainAsync<T>(string controllerUrl)
         {

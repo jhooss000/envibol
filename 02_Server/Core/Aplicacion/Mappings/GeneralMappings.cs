@@ -1,8 +1,14 @@
-﻿using Aplicacion.DTOs.Clasificador;
+﻿using Aplicacion.DTOs.Asistencia;
+using Aplicacion.DTOs.Clasificador;
+using Aplicacion.DTOs.Persona;
 using Aplicacion.DTOs.Segurity;
+using Aplicacion.DTOs.Vistas;
 using AutoMapper;
 using Dominio.Entities;
+using Dominio.Entities.Asistencia;
+using Dominio.Entities.Persona;
 using Dominio.Entities.Seguridad;
+using Dominio.Entities.Vistas;
 
 
 
@@ -18,10 +24,12 @@ namespace Aplicacion.Mappings
             CreateMap<SegvUsuario, SegUsuarioDto>();
             CreateMap<SegUsuario, SeUsuarioDto>();
             CreateMap<SegvMenuobjetos, UserMenuDto>();
-
-
             CreateMap<GenClasificador, GenClasificadorDto>();
             CreateMap<GenClasificadortipo, GenClasificadortipoDto>();
+            CreateMap<SAsistencia, SAsistenciaDto>();
+            CreateMap<SVistaAsistencias, SVistaAsistenciasDto>();
+            CreateMap<RrhPersona, RrhPersonaDto>();
+
 
 
             #endregion
@@ -29,11 +37,10 @@ namespace Aplicacion.Mappings
 
             #region Commands
             CreateMap<SeUsuarioDto, SegUsuario>();
-            //CreateMap<ConInventarioDto, ConInventario>();
             CreateMap<GenClasificadorDto, GenClasificador>();
-
             CreateMap<GenClasificadortipoDto, GenClasificadortipo>();
- 
+            CreateMap<SAsistenciaDto, SAsistencia>();
+            CreateMap<RrhPersonaDto, RrhPersona>();
 
             #endregion
         }

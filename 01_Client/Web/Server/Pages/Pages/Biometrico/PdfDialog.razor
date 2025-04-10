@@ -1,0 +1,33 @@
+﻿<MudDialog>
+    <DialogContent>
+        @if (!string.IsNullOrEmpty(UrlReporte))
+        {
+
+            <iframe style="width: 100%; height: 750px; border: none;"
+                    src="@UrlReporte"></iframe>
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cerrar" Color="Color.Error">Cerrar</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; }
+
+    [Parameter]
+    public string UrlReporte { get; set; }
+
+    [Parameter]
+    public string ParametrosFiltro { get; set; }
+    private void Cerrar() => MudDialog.Close();
+    protected override void OnParametersSet()
+    {
+        if (!string.IsNullOrEmpty(UrlReporte))
+        {
+            var uri = new Uri(UrlReporte);
+            ParametrosFiltro = uri.Query;
+        }
+    }
+}

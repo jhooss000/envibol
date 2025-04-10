@@ -3,6 +3,7 @@ using System.Reflection;
 using Aplicacion;
 using Aplicacion.Interfaces.Repositories;
 using Identity;
+using Identity.Services.Biometrico;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -77,6 +78,11 @@ namespace Webapi
                         new string[]{ }
                     }
                 });
+            });
+            // Registro del HttpClient para consumir la api del boimetrico
+            services.AddHttpClient<IBiometricoService, BiometricoService>(client =>
+            {
+                client.BaseAddress = new Uri("http://127.0.0.1:5000"); // Modifica la URL en produccion
             });
         }
 

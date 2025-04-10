@@ -74,6 +74,11 @@ namespace Persistencia.Repository.Common.Aplicacion
             return vList;
         }
 
+        public Task<IEnumerable<object>> GetAllAsync(Func<object, bool> value)
+        {
+            throw new NotImplementedException();
+        }
+
         private List<T> DataReaderMapToList<T>(IDataReader dr)
         {
             List<T> list = new List<T>();

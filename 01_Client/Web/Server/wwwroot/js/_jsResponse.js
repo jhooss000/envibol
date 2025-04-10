@@ -1,22 +1,27 @@
-function CargaReportePdf (objParam) {
+function CargaReportePdf(objParam) {
     var urlConfig = "_flowId=viewReportFlow&standAlone=true&decorate=no&";
-     var urlHost = document.getElementById("rptUrlDes").value;
-    var urlRender = "&j_username=envibol&j_password=123456789 &output=pdf";
-     urlReport = objParam.ruta;
-    urlReport = "reportUnit=" + urlReport.replace(/['/']/gi, '%2F');
+    var urlHost = document.getElementById("rptUrlDes").value;
+    var urlRender = "&j_username=envibol&j_password=123456789&output=pdf";
+    var urlReport = objParam.ruta;
+    urlReport = "reportUnit=" + urlReport.replace(/\//g, '%2F');
 
     var urlParam = '';
     var urlFinal = '';
 
-    if (typeof (objParam) != "undefined" && typeof (objParam) == "object") {
-        var vObj = Object.getOwnPropertyNames(objParam);
-        for (var i = 0; i < vObj.length; i++) {
-            urlParam = urlParam + '&' + vObj[i] + '=' + objParam[vObj[i]];
-        }
+    // Parámetros específicos del reporte
+    if (objParam.fecha_inicio) {
+        urlParam += "&fecha_inicio=" + encodeURIComponent(objParam.fecha_inicio);
+    }
+    if (objParam.fecha_fin) {
+        urlParam += "&fecha_fin=" + encodeURIComponent(objParam.fecha_fin);
+    }
+    if (objParam.nombre_apellido) {
+        urlParam += "&nombre_apellido=" + encodeURIComponent(objParam.nombre_apellido);
     }
 
     urlFinal = urlHost + urlConfig + urlReport + urlParam + urlRender;
-     window.open(urlFinal, "SedemReport", "location=no,width=900,height=750,scrollbars=yes,top=0,left=750,resizable = no");
+    console.log("URL Generada:", urlFinal);
+    return urlFinal;
 }
 
 function CargaReportePop(objParam) {

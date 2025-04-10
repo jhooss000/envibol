@@ -137,7 +137,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\Vistas\" />
     <Folder Include="temp\" />
   </ItemGroup>
 

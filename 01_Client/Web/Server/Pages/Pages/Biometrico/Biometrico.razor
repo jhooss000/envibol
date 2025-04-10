@@ -1,0 +1,94 @@
+﻿@page "/extraer"
+@using Infraestructura.Models.Clasificador
+@using Microsoft.AspNetCore.Components
+@using Syncfusion.Blazor.Grids
+@using System.Globalization
+@using MudBlazor
+@using Syncfusion.Blazor.Buttons
+@inherits MainBaseComponent
+@layout MainLayout
+@inject IJSRuntime JSRuntime
+@inject NavigationManager Navigation
+@inject NavigationManager Nav
+@inject NavigationManager NavigationManager
+@using System.Net.Http.Json
+@inject HttpClient Http
+
+<MudPaper Class="pa-4">
+    <MudText Typo="Typo.h5">Extraer Asistencia</MudText>
+    <MudGrid Class="mt-2">
+        <MudItem xs="12" sm="6">
+            <MudDatePicker @bind-Date="fechaInicio" Label="Fecha Inicio" />
+        </MudItem>
+        <MudItem xs="12" sm="6">
+            <MudDatePicker @bind-Date="fechaFin" Label="Fecha Fin" />
+        </MudItem>
+        <MudItem xs="12" Class="mt-2">
+            <MudButton OnClick="ExtraerAsistencia" Color="Color.Primary" Variant="Variant.Filled">
+                Extraer Asistencia
+            </MudButton>
+        </MudItem>
+    </MudGrid>
+    @if (!string.IsNullOrEmpty(asistenciaResult))
+    {
+        <MudText Class="mt-4">Resultado:</MudText>
+        <MudPaper Class="pa-2 mt-1" Elevation="1">
+            <pre>@asistenciaResult</pre>
+        </MudPaper>
+    }
+</MudPaper>
+
+<MudPaper Class="pa-4 mt-6">
+    <MudText Typo="Typo.h5">Extraer Usuarios</MudText>
+    <MudButton OnClick="ExtraerUsuarios" Color="Color.Primary" Variant="Variant.Filled" Class="mt-2">
+        Extraer Usuarios
+    </MudButton>
+    @if (!string.IsNullOrEmpty(usuariosResult))
+    {
+        <MudText Class="mt-4">Resultado:</MudText>
+        <MudPaper Class="pa-2 mt-1" Elevation="1">
+            <pre>@usuariosResult</pre>
+        </MudPaper>
+    }
+</MudPaper>
+
+@code {
+    DateTime? fechaInicio = DateTime.Today.AddDays(-7);
+    DateTime? fechaFin = DateTime.Today;
+
+    string asistenciaResult;
+    string usuariosResult;
+
+    async Task ExtraerAsistencia()
+    {
+        // Construir la URL con parámetros de consulta en formato ISO 8601
+        var url = $"https://localhost:44326/api/v1/Biometrico/ExtraerAsistencia?fechaInicio={fechaInicio:O}&fechaFin={fechaFin:O}";
+        try
+        {
+            _Loading.Show();
+            asistenciaResult = await Http.GetStringAsync(url);
+            _Loading.Hide();
+            _MessageShow("Extracción de asistencia completada", State.Success);
+        }
+        catch (Exception ex)
+        {
+            _Loading.Hide();
+            asistenciaResult = "Error: " + ex.Message;
+            _MessageShow(asistenciaResult, State.Error);
+        }
+    }
+
+
+    async Task ExtraerUsuarios()
+    {
+        var url = "api/biometrico/ExtraerUsuarios";
+        try
+        {
+            usuariosResult = await Http.GetStringAsync(url);
+        }
+        catch (Exception ex)
+        {
+            usuariosResult = "Error: " + ex.Message;
+        }
+    }
+}

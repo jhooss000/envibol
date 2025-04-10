@@ -1,5 +1,8 @@
 ﻿using Dominio.Entities;
+using Dominio.Entities.Asistencia;
+using Dominio.Entities.Persona;
 using Dominio.Entities.Seguridad;
+using Dominio.Entities.Vistas;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistencia.Contexts
@@ -17,7 +20,10 @@ namespace Persistencia.Contexts
         public DbSet<GenClasificadortipo> ClasificadorTipo { get; set; }
         public DbSet<GenClasificador> GenClasificador { get; set; }
         public DbSet<GenClasificadortipo> GenClasificadortipo { get; set; }
-  
+        public DbSet<SAsistencia> SAsistencia { get; set; }
+        public DbSet<SVistaAsistencias> SVistaAsistencias { get; set; }
+        public DbSet<RrhPersona> RrhPersona { get; set; }
+
         #endregion
 
     }
