@@ -5,8 +5,8 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY . .
-RUN dotnet restore "./Servidor.csproj"
-RUN dotnet publish "./Servidor.csproj" -c Release -o /app/publish
+RUN dotnet restore "Servidor.csproj"
+RUN dotnet publish "Servidor.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
